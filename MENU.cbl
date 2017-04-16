@@ -21,7 +21,7 @@
            05 LINE 11 COL 15 VALUE "PRINT A REPORT   :P".
            05 LINE 12 COL 15 VALUE "EXIT             :X".
            05 LINE 14 COL 15 VALUE "ENTER LETTER OF SELECTION: ".
-           05 LINE 14 COL 15 PIC X(3) TO OPTION.
+           05 LINE 14 COL 43 PIC X TO OPTION.
        PROCEDURE DIVISION.
        100-MAIN.
            PERFORM UNTIL OPTION = 'X' OR 'x'
@@ -47,6 +47,8 @@
                    CALL 'PROJ-ENROLLMENT' USING WS-SNO
                ELSE
                    CALL '(PRINT-REPORT-PGM)'
+
                END-IF
+               DISPLAY CLEAR-SCREEN
            END-PERFORM
            STOP RUN.
