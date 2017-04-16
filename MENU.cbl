@@ -29,28 +29,23 @@
                DISPLAY MENU-SCREEN
                ACCEPT MENU-SCREEN
 
-               IF OPTION = 'A' , 'F' , 'R' , 'E'
+               IF OPTION = 'A' OR 'F' OR 'R' OR 'E'
                    DISPLAY SNO-SCREEN
                    ACCEPT SNO-SCREEN
-               END-IF.
+               END-IF
                DISPLAY CLEAR-SCREEN
 
                IF OPTION = 'A'
                    CALL 'PROJ-ADD-STUDENT' USING WS-SNO
-               ELSE
-               IF OPTION = 'C'
+               ELSE IF OPTION = 'C'
                    CALL '(ADD-CLASS-PGM)'
-               ELSE
-               IF OPTION = 'F'
+               ELSE IF OPTION = 'F'
                    CALL '(FINANCIAL-AID-PGM)' USING WS-SNO
-               ELSE
-               IF OPTION = 'R'
+               ELSE IF OPTION = 'R'
                    CALL '(ADD-RECEIPTS-PGM)' USING WS-SNO
-               ELSE
-               IF OPTION = 'E'
+               ELSE IF OPTION = 'E'
                    CALL 'PROJ-ENROLLMENT' USING WS-SNO
                ELSE
-               IF OPTION = 'P'
                    CALL '(PRINT-REPORT-PGM)'
                END-IF
            END-PERFORM
