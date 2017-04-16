@@ -22,6 +22,7 @@
            05  FILLER             PIC X(10).
        COPY COLORS.
        01  WS-SNO PIC 9(9).
+       01  ANS PIC X.
        SCREEN SECTION.
        01  BLANK-SCREEN.
            05  BLANK SCREEN.
@@ -47,7 +48,7 @@
            MOVE WS-SNO TO SF-STU-NUM
            READ SF-FILE-DESC
              INVALID KEY PERFORM 200-STUDENT-ROUTINE
-             NOT INVALID KEY DISPLAY 'STUDENT EXISTS'
+             NOT INVALID KEY PERFORM 300-EXISTING-ROUTINE
            END-READ
            CLOSE SF-FILE-DESC
            EXIT PROGRAM.
@@ -60,3 +61,8 @@
            WRITE SF-RECORD
            CLOSE SF-FILE-DESC
            OPEN INPUT SF-FILE-DESC.
+       300-EXISTING-ROUTINE.
+           DISPLAY BLANK-SCREEN
+           DISPLAY 'STUDENT EXISTS'
+           DISPLAY 'HIT ENTER TO GO BACK TO MAIN SCREEN'
+           ACCEPT ANS.
