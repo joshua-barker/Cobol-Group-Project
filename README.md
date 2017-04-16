@@ -9,3 +9,5 @@ The other issue is files and the locations, we need to make sure they are sourci
 Last is the rel file for enrollment, since we have fd everything should be good on your side to start printout prog.
 
 Best of luck!
+
+**Update** Using menu and add student inside a project work - Test if you want to.
