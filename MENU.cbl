@@ -32,18 +32,18 @@
                    DISPLAY SNO-SCREEN
                    ACCEPT SNO-SCREEN
                    IF OPTION = 'A'
-                       CALL 'PROJ-ADD-STUDENT' USING WS-SNO
-                   ELSE IF OPTION = 'C'
-                       CALL '(ADD-CLASS-PGM)'
+                       CALL 'PROJ-ADD-STUDENT' USING WS-SNO                   
                    ELSE IF OPTION = 'F'
                        CALL '(FINANCIAL-AID-PGM)' USING WS-SNO
                    ELSE IF OPTION = 'R'
                        CALL '(ADD-RECEIPTS-PGM)' USING WS-SNO
-                   ELSE IF OPTION = 'E'
-                       CALL 'PROJ-ENROLLMENT' USING WS-SNO
-                   ELSE
-                       CALL '(PRINT-REPORT-PGM)'
+                   ELSE 
+                       CALL 'PROJ-ENROLLMENT' USING WS-SNO                   
                    END-IF
+               ELSE IF OPTION = 'C'
+                       CALL '(ADD-CLASS-PGM)'
+               ELSE IF OPTION = 'P'
+                       CALL '(PRINT-REPORT-PGM)'
                END-IF
                DISPLAY CLEAR-SCREEN
            END-PERFORM
