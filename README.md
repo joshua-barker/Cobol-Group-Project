@@ -11,3 +11,5 @@ Last is the rel file for enrollment, since we have fd everything should be good 
 Best of luck!
 
 **Update** Using menu and add student inside a project work - Test if you want to.
+
+PROJECT CLASS SECT AND CS-SECT.CPY FILES ADDED
