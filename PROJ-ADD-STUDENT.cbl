@@ -17,9 +17,13 @@
        01  ARE-THERE-MORE-RECORDS PIC X VALUE 'Y'.
        01  WS-SF-RECORD.
            05  WS-SF-STU-NUM      PIC 9(9).
-           05  FILLER             PIC X(39).
-           05  WS-SF-ENR-REC-PNTR PIC 9(5).
-           05  FILLER             PIC X(10).
+           05  WS-NAME            PIC X(10).
+           05  WS-ADD             PIC X(10).
+           05  WS-PHONE           PIC 9(10).
+           05  WS-SSN             PIC 9(9).
+           05  WS-FIN-AID-PNTR    PIC 9(5).
+           05  WS-RCT-REC-PNTR    PIC 9(5).
+           05  WS-ENR-REC-PNTR    PIC 9(5).
        COPY COLORS.
        01  WS-SNO PIC 9(9).
        01  ANS PIC X.
@@ -55,10 +59,13 @@
        200-STUDENT-ROUTINE.
            DISPLAY SCREEN-NEW-STUDENT
            ACCEPT SCREEN-NEW-STUDENT
+           MOVE SF-RECORD TO WS-SF-RECORD
+           MOVE ZEROS TO WS-FIN-AID-PNTR
+           MOVE ZEROS TO WS-RCT-REC-PNTR
+           MOVE ZEROS TO WS-ENR-REC-PNTR
            CLOSE SF-FILE-DESC
            OPEN I-O SF-FILE-DESC
-           MOVE ZERO TO SF-ENR-REC-PNTR
-           WRITE SF-RECORD
+           WRITE SF-RECORD FROM WS-SF-RECORD
            CLOSE SF-FILE-DESC
            OPEN INPUT SF-FILE-DESC.
        300-EXISTING-ROUTINE.
