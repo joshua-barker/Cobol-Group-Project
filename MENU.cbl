@@ -3,7 +3,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01 MORE-TASKS   PIC X(3) VALUE 'YES'.
-       01 OPTION       PIC X.
+       01 OPTION       PIC X VALUE SPACES.
        01 WS-SNO       PIC 9(9).
        SCREEN SECTION.
        01 CLEAR-SCREEN.
