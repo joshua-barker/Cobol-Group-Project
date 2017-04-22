@@ -27,10 +27,10 @@
        COPY CS-SECT.
        WORKING-STORAGE SECTION.
        01  ARE-THERE-MORE-RECORDS PIC X VALUE 'Y'.
-       01  X PIC 9(3).
+       01  X PIC 9(5).
        01  EOF-REC.
            05  EOF-POINTER       PIC 9(5).
-           05  FILLER            PIC X(13).
+           05  FILLER            PIC X(14).
        01  ENR-REC.
            05 RF-STUDENT-NUM      PIC 9(9).
            05 RF-CRN              PIC X(5).
@@ -88,9 +88,10 @@
       *    CLOSE CS-SECT
       *    CLOSE SF-FILE-DESC
       *    CLOSE EF-FILE-DES
-           OPEN INPUT EF-FILE-DES
+           OPEN I-O EF-FILE-DES
            OPEN INPUT SF-FILE-DESC
            OPEN INPUT CS-SECT
+           MOVE SPACES TO MORE-CLS
            PERFORM UNTIL MORE-CLS = 'X'
                MOVE SPACES TO SF-RECORD
                MOVE WS-SNO TO SF-STU-NUM
@@ -114,8 +115,6 @@
            ACCEPT CLASS-INFO
            IF CLS-CONFIRM = 'Y' THEN
                MOVE SPACES TO EF-RECORD
-               CLOSE EF-FILE-DES
-               OPEN I-O EF-FILE-DES
                MOVE 1 TO X
                READ EF-FILE-DES
                MOVE EF-RECORD TO EOF-REC
