@@ -13,3 +13,5 @@ Best of luck!
 **Update** Using menu and add student inside a project work - Test if you want to.
 
 PROJECT CLASS SECT AND CS-SECT.CPY FILES ADDED
+
+Can now use the "Proj-Master.app" to build and run after downloading this file.... Only using enroll and add student modules right now.
