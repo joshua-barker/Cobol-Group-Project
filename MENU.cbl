@@ -43,7 +43,7 @@
                ELSE IF OPTION = 'C'
                        CALL 'PROJ-ADD-CLASS'
                ELSE IF OPTION = 'P'
-                       CALL '(PRINT-REPORT-PGM)'
+                       CALL 'PROJ-PRINT-MASTER'
                END-IF
                DISPLAY CLEAR-SCREEN
            END-PERFORM

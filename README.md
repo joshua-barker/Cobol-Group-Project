@@ -18,3 +18,7 @@ Can now use the "Proj-Master.app" to build and run after downloading this file..
 
 04/22 - Josh
 Added PROJ-ADD-CLASS file for adding classes, is also linked to in the Main Menu app.
+
+04/23 - Josh
+Added PROJ-PRINT-MASTER which is the menu to select what you wish to print
+Added PROJ-PRINT-STUDENTS which prints a file of all current students
