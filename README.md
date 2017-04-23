@@ -15,3 +15,6 @@ Best of luck!
 PROJECT CLASS SECT AND CS-SECT.CPY FILES ADDED
 
 Can now use the "Proj-Master.app" to build and run after downloading this file.... Only using enroll and add student modules right now.
+
+04/22 - Josh
+Added PROJ-ADD-CLASS file for adding classes, is also linked to in the Main Menu app.

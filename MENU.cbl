@@ -41,7 +41,7 @@
                        CALL 'PROJ-ENROLLMENT' USING WS-SNO                   
                    END-IF
                ELSE IF OPTION = 'C'
-                       CALL '(ADD-CLASS-PGM)'
+                       CALL 'PROJ-ADD-CLASS'
                ELSE IF OPTION = 'P'
                        CALL '(PRINT-REPORT-PGM)'
                END-IF
