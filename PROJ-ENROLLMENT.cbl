@@ -40,7 +40,7 @@
            05  FILLER             PIC X(49).
            05  WS-SF-ENR-REC-PNTR PIC 9(5).
        01  WS-TMP-SNO             PIC 9(9).
-       01  WS-TMP-CRN             PIC X(5).
+       01  WS-TMP-CRN             PIC 9(5).
        01  WS-TMP-CRS-CODE        PIC X(6).
        01  WS-TMP-CS-DESC         PIC X(10).
        01  WS-TMP-CS-CRED-HR      PIC 99.
