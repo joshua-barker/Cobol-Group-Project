@@ -74,7 +74,7 @@
            END-PERFORM
            CLOSE CS-FILE-DESC
                  CLASS-REPORT
-           STOP RUN.
+           EXIT PROGRAM.
        200-HEADING-RTN.
            ADD 1 TO WS-PAGE
            MOVE WS-PAGE TO PAGE-NO-H1
