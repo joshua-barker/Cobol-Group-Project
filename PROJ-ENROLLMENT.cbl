@@ -96,7 +96,7 @@
                MOVE SPACES TO SF-RECORD
                MOVE WS-SNO TO SF-STU-NUM
                READ SF-FILE-DESC
-                 INVALID KEY PERFORM 300-EXISTING-ROUTINE
+                 INVALID KEY PERFORM 300-NOT-EXISTING-ROUTINE
                  NOT INVALID KEY PERFORM 200-ENROLL-ROUTINE
                END-READ
            END-PERFORM
@@ -124,18 +124,11 @@
                IF SF-ENR-REC-PNTR > 0 THEN
                  MOVE SF-ENR-REC-PNTR TO X
                  READ EF-FILE-DES
-                 MOVE EF-RECORD TO ENR-REC
-      * THIS BIT DISPLAYS THE LIST OF CLASSES FOR A STUDENT
-      *      DISPLAY 'STUDENT CLASSES: '
+                 MOVE EF-RECORD TO ENR-REC      
                  PERFORM UNTIL RF-NXT-CLS-PNTR = 0
                    MOVE RF-NXT-CLS-PNTR TO X
                    READ EF-FILE-DES
-                   MOVE EF-RECORD TO ENR-REC
-      *            MOVE RF-CRN TO CS-CRN
-      *            READ CL
-      *            DISPLAY 'CRN NUMBER:   ', RF-CRN
-      *            DISPLAY 'COURSE NUMBER: ', RF-COURSE-NUMBER
-      *            DISPLAY ' '
+                   MOVE EF-RECORD TO ENR-REC      
                  END-PERFORM
                  MOVE WS-TMP-EOF-PNTR TO RF-NXT-CLS-PNTR
                  REWRITE EF-RECORD FROM ENR-REC
@@ -153,15 +146,12 @@
                MOVE WS-SNO TO RF-STUDENT-NUM
                MOVE ZERO TO RF-NXT-CLS-PNTR
                WRITE EF-RECORD FROM ENR-REC
-           END-IF
-      *    DISPLAY 'LINE NUMBER:   ', RF-LINE-NUMBER
-      *    DISPLAY 'COURSE NUMBER: ', RF-COURSE-NUMBER
-      *    DISPLAY ' '
+           END-IF     
            DISPLAY ANOTHER-CLASS
            ACCEPT ANOTHER-CLASS.
-       300-EXISTING-ROUTINE.
+       300-NOT-EXISTING-ROUTINE.
            DISPLAY BLANK-SCREEN
-           DISPLAY 'STUDENT EXISTS'
+           DISPLAY 'STUDENT NOT IN SYSTEM'
            DISPLAY 'HIT ENTER TO GO BACK TO MAIN SCREEN'
            MOVE 'X' TO MORE-CLS
            ACCEPT ANS.
