@@ -34,7 +34,7 @@
                    IF OPTION = 'A'
                        CALL 'PROJ-ADD-STUDENT' USING WS-SNO                   
                    ELSE IF OPTION = 'F'
-                       CALL '(FINANCIAL-AID-PGM)' USING WS-SNO
+                       CALL 'PROJ-FIN-AID' USING WS-SNO
                    ELSE IF OPTION = 'R'
                        CALL '(ADD-RECEIPTS-PGM)' USING WS-SNO
                    ELSE 
