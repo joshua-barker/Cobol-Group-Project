@@ -28,7 +28,7 @@
                ELSE IF OPTION = 'C'
                    CALL 'PROJ-PRINT-CLASSES'
                ELSE IF OPTION = 'F'
-                   CALL '(PROJ-PRINT-FINAID)'
+                   CALL 'PROJ-PRINT-FIN-AID'
                ELSE IF OPTION = 'R'
                    CALL '(PROJ-PRINT-RECEIPTS)'
                ELSE IF OPTION = 'E'
