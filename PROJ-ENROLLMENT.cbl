@@ -13,6 +13,10 @@
               ORGANIZATION IS RELATIVE
               ACCESS IS DYNAMIC
               RELATIVE KEY IS X.
+       SELECT RC-FILE-DESC ASSIGN TO 'PROJ-REC.REL'
+              ORGANIZATION IS RELATIVE
+              ACCESS IS DYNAMIC
+              RELATIVE KEY IS RC-KEY.
        SELECT CS-SECT ASSIGN TO 'PROJ-CLASS-SECT.DAT'
               ORGANIZATION IS INDEXED
               ACCESS IS DYNAMIC
@@ -24,13 +28,19 @@
        FD  EF-FILE-DES.
        01  EF-RECORD PIC X(19).
        FD  CS-SECT IS EXTERNAL RECORD CONTAINS 23 CHARACTERS.
-       COPY CS-SECT.
+           COPY CS-SECT.
+       FD  RC-FILE-DESC IS EXTERNAL RECORD CONTAINS 36 CHARACTERS.
+           COPY RC-FILE-DESC.
        WORKING-STORAGE SECTION.
        01  ARE-THERE-MORE-RECORDS PIC X VALUE 'Y'.
        01  X PIC 9(5).
+       01  RC-KEY PIC 9(5).
        01  EOF-REC.
            05  EOF-POINTER       PIC 9(5).
            05  FILLER            PIC X(14).
+       01  RC-EOF-REC.
+           05  RC-EOF-POINTER    PIC 9(5).
+           05  FILLER            PIC X(31).
        01  ENR-REC.
            05 RF-STUDENT-NUM      PIC 9(9).
            05 RF-CRN              PIC X(5).
@@ -39,6 +49,10 @@
            05  WS-SF-STU-NUM      PIC 9(9).
            05  FILLER             PIC X(49).
            05  WS-SF-ENR-REC-PNTR PIC 9(5).
+       01  WS-RC-SF-RECORD.
+           05  FILLER             PIC X(48).
+           05  WS-SF-RCT-REC-PNTR PIC 9(5).
+           05  FILLER             PIC X(10).
        01  WS-TMP-SNO             PIC 9(9).
        01  WS-TMP-CRN             PIC 9(5).
        01  WS-TMP-CRS-CODE        PIC X(6).
@@ -50,6 +64,7 @@
        01  MORE-CLS               PIC X.
        01  ANS                    PIC X.
        COPY COLORS.
+       COPY PROJ-CONSTANT-VARIABLES.
        SCREEN SECTION.
        01  BLANK-SCREEN.
            05  BLANK SCREEN.
@@ -89,6 +104,7 @@
       *    CLOSE SF-FILE-DESC
       *    CLOSE EF-FILE-DES
            OPEN I-O EF-FILE-DES
+           OPEN I-O RC-FILE-DESC
            OPEN INPUT SF-FILE-DESC
            OPEN INPUT CS-SECT
            MOVE SPACES TO MORE-CLS
@@ -101,6 +117,7 @@
                END-READ
            END-PERFORM
            CLOSE SF-FILE-DESC
+           CLOSE RC-FILE-DESC
            CLOSE EF-FILE-DES
            CLOSE CS-SECT
            EXIT PROGRAM.
@@ -146,6 +163,40 @@
                MOVE WS-SNO TO RF-STUDENT-NUM
                MOVE ZERO TO RF-NXT-CLS-PNTR
                WRITE EF-RECORD FROM ENR-REC
+      *-- END OF ENROLLMENT ADDITION --
+      *-- BEGIN RECEIPT ADDITION --
+               MOVE SPACES TO RC-REC
+               MOVE 1 TO RC-KEY
+               READ RC-FILE-DESC
+               MOVE RC-REC TO RC-EOF-REC
+               MOVE RC-EOF-POINTER TO WS-TMP-EOF-PNTR
+               ADD 1 TO RC-EOF-POINTER
+               REWRITE RC-REC FROM RC-EOF-REC
+               IF SF-RCT-REC-PNTR > 0 THEN
+                 MOVE SF-RCT-REC-PNTR TO RC-KEY
+                 READ RC-FILE-DESC
+                 PERFORM UNTIL RC-NEXT-PNTR = 0
+                   MOVE RC-NEXT-PNTR TO RC-KEY
+                   READ RC-FILE-DESC
+                 END-PERFORM
+                 MOVE WS-TMP-EOF-PNTR TO RC-NEXT-PNTR
+                 REWRITE RC-REC
+               ELSE
+                 CLOSE SF-FILE-DESC
+                 OPEN I-O SF-FILE-DESC
+                 MOVE SF-RECORD TO WS-RC-SF-RECORD
+                 MOVE WS-TMP-EOF-PNTR TO WS-SF-RCT-REC-PNTR
+                 REWRITE SF-RECORD FROM WS-RC-SF-RECORD
+                 CLOSE SF-FILE-DESC
+                 OPEN INPUT SF-FILE-DESC
+               END-IF
+               MOVE WS-TMP-EOF-PNTR TO RC-KEY
+               COMPUTE RC-AMT-OWED = TUITION-RATE*CS-CRED-HR
+               MOVE 'ENROLLMENT' TO RC-TYPE
+               MOVE WS-SNO TO RC-STU-NUM
+               MOVE ZEROS TO RC-AMT-PAID
+               MOVE ZEROS TO RC-NEXT-PNTR
+               WRITE RC-REC
            END-IF     
            DISPLAY ANOTHER-CLASS
            ACCEPT ANOTHER-CLASS.
