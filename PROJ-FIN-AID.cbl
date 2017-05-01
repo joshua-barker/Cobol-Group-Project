@@ -49,7 +49,7 @@
           05 LINE 5 COLUMN 28 PIC 9(4) TO WS-FA-AWARD-CODE.
        01 SCRN-AMOUNT.
           05 LINE 7 COLUMN 1 VALUE 'ENTER FINANCIAL AID AMOUNT: '.
-          05 LINE 7 COLUMN 30 PIC 9(5) TO WS-FA-AWARD-AMNT.
+          05 LINE 7 COLUMN 30 PIC 9(4)V99 TO WS-FA-AWARD-AMNT.
        01 SCRN-MORE-DATA.
           05 BLANK SCREEN.
           05 LINE 1 COLUMN 1 VALUE
@@ -72,13 +72,7 @@
            END-PERFORM
            CLOSE SF-FILE-DESC
            CLOSE FA-FILE-DESC
-           EXIT PROGRAM.
-      *    IF WS-OPION = "A"
-      *    PERFORM 300-WRITE-ROUTINE
-      *    END-IF
-      *    IF WS-OPION = "P"
-      *    PERFORM 700-PNTR-ROUTINE
-      *    END-IF
+           EXIT PROGRAM.     
        200-INPUT-ROUTINE.
            DISPLAY SCRN-CLEAR
            DISPLAY SCRN-SID
@@ -126,39 +120,3 @@
            DISPLAY 'HIT ENTER TO GO BACK TO MAIN SCREEN'
            MOVE 'NO ' TO MORE-DATA
            ACCEPT ANS.
-      *500-ERROR-ROUTINE.
-      *    DISPLAY 'ERROR'
-      *    CLOSE FA-FILE-DESC
-      *          STU-FILE-DESC
-      *    EXIT PROGRAM.
-      *600-REWRITE-ROUTINE.
-      *    IF SF-FIN-AID-PNTR IS EQUAL TO 00000
-      *       MOVE FA-EOF TO SF-FIN-AID-PNTR
-      *       REWRITE SF-RECORD
-      *       MOVE FA-EOF TO WS-KEY
-      *       PERFORM 300-WRITE-ROUTINE
-      *    ELSE
-      *       MOVE SF-FIN-AID-PNTR TO WS-KEY
-      *       PERFORM 700-PNTR-ROUTINE.
-      *700-PNTR-ROUTINE.
-      *    READ FA-FILE-DESC
-      *    IF  FA-NEXT-PNTR IS EQUAL TO 00000
-      *        MOVE WS-CONT-REC TO FA-NEXT-PNTR
-      *        REWRITE FA-REC
-      *        MOVE WS-CONT-REC TO WS-KEY
-      *        MOVE WS-AWRD-CD TO FA-AWARD-CODE
-      *        MOVE WS-AWRD-AMNT TO FA-AWARD-AMT
-      *        MOVE 00000 TO FA-NEXT-PNTR
-      *        WRITE FA-REC
-      *          INVALID KEY DISPLAY 'INVALID KEY' WS-KEY
-      *        END-WRITE
-      *        ADD 1 TO WS-CONT-REC
-      *        MOVE 1 TO WS-KEY
-      *        MOVE WS-CONT-REC TO FA-EOF
-      *        REWRITE FA-CONTROL
-      *    ELSE
-      *        MOVE FA-NEXT-PNTR TO WS-KEY
-      *        PERFORM 800-NEXT-ROUTINE
-      *    END-IF.
-      *800-NEXT-ROUTINE.
-      *    PERFORM 700-PNTR-ROUTINE.
