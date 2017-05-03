@@ -36,7 +36,7 @@
                    ELSE IF OPTION = 'F'
                        CALL 'PROJ-FIN-AID' USING WS-SNO
                    ELSE IF OPTION = 'R'
-                       CALL '(ADD-RECEIPTS-PGM)' USING WS-SNO
+                       CALL 'PROJ-RC' USING WS-SNO
                    ELSE 
                        CALL 'PROJ-ENROLLMENT' USING WS-SNO                   
                    END-IF
