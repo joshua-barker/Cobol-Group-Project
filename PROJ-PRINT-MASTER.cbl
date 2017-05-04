@@ -31,9 +31,9 @@
                ELSE IF OPTION = 'F'
                    CALL 'PROJ-PRINT-FIN-AID'
                ELSE IF OPTION = 'R'
-                   CALL '(PROJ-PRINT-RECEIPTS)'
+                   CALL 'PROJ-PRINT-RECEIPTS'
                ELSE IF OPTION = 'E'
-                   CALL '(PROJ-PRINT-ROSTER)'
+                   CALL 'PROJ-PRINT-ROSTER'
                ELSE IF OPTION = 'A'
                    CALL 'PROJ-PRINT-STU-CLASS'
                ELSE

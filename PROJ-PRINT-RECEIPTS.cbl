@@ -29,7 +29,7 @@
           05 DAY-WS                PIC XX.
        01 WS-PAGE                  PIC 99       VALUE ZERO.
        01 WS-CONTROL-REC.
-          05 WS-TYPE               PIC X(10).
+          05 WS-TYPE               PIC X(11).
           05 WS-STU-NUM            PIC 9(9).
           05 WS-AMT-OWED           PIC 9(4)V99.
           05 WS-AMT-PAID           PIC 9(4)V99.
@@ -59,7 +59,7 @@
           05                       PIC X(8)     VALUE SPACES.
        01 DETAIL-LINE.
           05                       PIC X(2)     VALUE SPACES.
-          05 TYPE-OUT              PIC X(10).
+          05 TYPE-OUT              PIC X(11).
           05                       PIC X(4)     VALUE SPACES.
           05 S-NO-OUT              PIC 9(9).
           05                       PIC X(4)     VALUE SPACES.

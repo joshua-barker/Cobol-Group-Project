@@ -43,11 +43,15 @@
            05 WS-CLASS-TITLE                   PIC X(13)
                VALUE ' CLASS ROSTER'.
            05 QUIT                             PIC X.
+       SCREEN SECTION.
+       01 CLEAR-SCREEN.
+          05 BLANK SCREEN.
        PROCEDURE DIVISION.
        100-MAIN-MODULE.
        OPEN INPUT STUDENT-FILE
                   ENROLLMENT-FILE
                   CLASS-FILE
+       DISPLAY CLEAR-SCREEN
        DISPLAY '  CLASS ROSTER'
        DISPLAY '-----------------'
        PERFORM UNTIL MORE-RECORDS = 'N'
