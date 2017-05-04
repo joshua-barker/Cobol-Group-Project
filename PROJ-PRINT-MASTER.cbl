@@ -14,7 +14,8 @@
            05 LINE 8  COL 15 VALUE "PRINT FIN AID       :F".
            05 LINE 9  COL 15 VALUE "PRINT RECEIPTS      :R".
            05 LINE 10 COL 15 VALUE "PRINT CLASS ROSTER  :E".
-           05 LINE 11 COL 15 VALUE "RETURN TO MAIN MENU :X".
+           05 LINE 11 COL 15 VALUE "PRINT STUD CLASSES  :A".
+           05 LINE 12 COL 15 VALUE "RETURN TO MAIN MENU :X".
            05 LINE 13 COL 15 VALUE "ENTER LETTER OF SELECTION: ".
            05 LINE 13 COL 43 PIC X TO OPTION.
        PROCEDURE DIVISION.
@@ -33,6 +34,8 @@
                    CALL '(PROJ-PRINT-RECEIPTS)'
                ELSE IF OPTION = 'E'
                    CALL '(PROJ-PRINT-ROSTER)'
+               ELSE IF OPTION = 'A'
+                   CALL 'PROJ-PRINT-STU-CLASS'
                ELSE
                    DISPLAY 'RETURNING TO MAIN MENU'
                END-IF
