@@ -13,7 +13,7 @@
        DATA DIVISION.
        FILE SECTION.
        FD FA-FILE-DESC IS EXTERNAL RECORD CONTAINS 29 CHARACTERS.
-       COPY SF-FILE-DESC.
+       COPY FA-FILE-DESC.
        FD FIN-AID-REPORT
           DATA RECORD IS REPORT-REC.
        01 REPORT-REC               PIC X(70).
@@ -28,6 +28,11 @@
           05 MONTH-WS              PIC XX.
           05 DAY-WS                PIC XX.
        01 WS-PAGE                  PIC 99       VALUE ZERO.
+       01 WS-CONTROL-REC.
+          05 WS-AWARD-CODE         PIC 9(4).
+          05 WS-AWARD-AMNT         PIC 9(4)V99.
+          05 WS-STU-NUM            PIC 9(9).
+          05 WS-NEXT-PNTR          PIC 9(5).
        01 HEADING-1.
           05                       PIC X(6)     VALUE SPACES.
           05                       PIC X(30)
@@ -69,7 +74,7 @@
            MOVE "YES" TO ARE-THERE-MORE-RECORDS
            MOVE 2 TO WS-KEY
            PERFORM UNTIL NO-MORE-RECORDS
-               READ NEXT FA-FILE-DESC
+               READ FA-FILE-DESC INTO WS-CONTROL-REC
                    INVALID KEY MOVE "NO " TO ARE-THERE-MORE-RECORDS
                    NOT INVALID KEY PERFORM 300-PRINT-RTN
                END-READ
@@ -93,12 +98,13 @@
            MOVE 0 TO WS-LINE-CT
            ADD 10 TO WS-LINE-CT.
        300-PRINT-RTN.
-           MOVE FA-AWARD-CODE TO AWARD-CODE-OUT
-           MOVE FA-AWARD-AMT TO AWARD-AMT-OUT
-           MOVE FA-STU-NUM TO S-NO-OUT
-           MOVE SFA-RC-PNTR TO RC-NO-OUT
+           MOVE WS-AWARD-CODE TO AWARD-CODE-OUT
+           MOVE WS-AWARD-AMNT TO AWARD-AMT-OUT
+           MOVE WS-STU-NUM TO S-NO-OUT
+           MOVE WS-NEXT-PNTR TO RC-NO-OUT
            IF WS-LINE-CT > 55
                PERFORM 200-HEADING-RTN
            END-IF
            WRITE REPORT-REC FROM DETAIL-LINE AFTER 1
-           ADD 1 TO WS-LINE-CT.
+           ADD 1 TO WS-LINE-CT
+           ADD 1 TO WS-KEY.
