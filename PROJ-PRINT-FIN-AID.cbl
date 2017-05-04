@@ -35,7 +35,7 @@
           05 WS-NEXT-PNTR          PIC 9(5).
        01 HEADING-1.
           05                       PIC X(6)     VALUE SPACES.
-          05                       PIC X(30)
+          05                       PIC X(32)
                VALUE "COMPLETE FINANCIAL AID LISTING".
           05 MONTH-H1              PIC X(2).
           05                       PIC X        VALUE "/".
@@ -45,7 +45,7 @@
           05                       PIC X(9)
                VALUE "   PAGE ".
           05 PAGE-NO-H1            PIC 9(2).
-          05                       PIC X(13)    VALUE SPACES.
+          05                       PIC X(11)    VALUE SPACES.
        01 HEADING-2.
           05                       PIC X(2)     VALUE SPACES.
           05                       PIC X(10)    VALUE "AWARD CODE".
@@ -60,7 +60,7 @@
           05                       PIC X(2)     VALUE SPACES.
           05 AWARD-CODE-OUT        PIC 9(4).
           05                       PIC X(10)    VALUE SPACES.
-          05 AWARD-AMT-OUT         PIC 9(4)V99.
+          05 AWARD-AMT-OUT         PIC 9(4).99.
           05                       PIC X(6)     VALUE SPACES.
           05 S-NO-OUT              PIC 9(9).
           05                       PIC X(4)     VALUE SPACES.
